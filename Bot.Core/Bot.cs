@@ -23,5 +23,17 @@ namespace Bot.Core
             }
         }
 
+
+        public BotActions SelectAction(Environment currentConditions)
+        {
+            BotActions rv = null;
+            while (rv == null)
+            {
+
+            }
+
+            return rv;
+
+        }
     }
 }

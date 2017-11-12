@@ -14,9 +14,8 @@ namespace Bot.Core
         public bool? IsOwnerSleeping { get; set; }
         public bool? IsStrangerOutside { get; set; }
         public bool? IsStrangerInside { get; set; }
-        public bool? IsOwnerSayingStayCommand { get; set; }
-        public bool? DidOwnerThroughToy { get; set; }
-        public bool? AmIInside { get; set; }
+        public bool? IsOwnerSayingSitCommand { get; set; }
+        public bool? DidOwnerGiveToy { get; set; }
 
         private static bool? SeedRandomBool()
         {
@@ -42,10 +41,44 @@ namespace Bot.Core
             this.IsOwnerSleeping = SeedRandomBool();
             this.IsStrangerOutside = SeedRandomBool();
             this.IsStrangerInside = SeedRandomBool();
-            this.IsOwnerSayingStayCommand = SeedRandomBool();
-            this.DidOwnerThroughToy = SeedRandomBool();
-            this.AmIInside = SeedRandomBool();
+            this.IsOwnerSayingSitCommand = SeedRandomBool();
+            this.DidOwnerGiveToy = SeedRandomBool();
             return this;
+        }
+
+
+        private string DeterStringForProperty(bool? value, string yesString, string wildcardString, string noString)
+        {
+            if (value == null)
+            {
+                return wildcardString;
+            } else
+            {
+                if (value.GetValueOrDefault()) return yesString;
+                else return noString;
+            }
+        }
+
+        public override string ToString()
+        {
+            var rv = new StringBuilder();
+            rv.Append("The current conditions are");
+            rv.Append(System.Environment.NewLine);
+            rv.Append(DeterStringForProperty(IsDay, "Is is day", "Daytime doesnt matter", "It is night"));
+            rv.Append(System.Environment.NewLine);
+            rv.Append(DeterStringForProperty(IsOwnerHome, "Owner is home", "Owner at home doesnt matter", "Onwer is away"));
+            rv.Append(System.Environment.NewLine);
+            rv.Append(DeterStringForProperty(IsOwnerSleeping, "Owner is sleeping", "Owner sleeping doesnt matter", "owner is awake"));
+            rv.Append(System.Environment.NewLine);
+            rv.Append(DeterStringForProperty(IsStrangerInside, "there is a Stragner is inside", "stranger inside status doesnt matter", "No stragner inside"));
+            rv.Append(System.Environment.NewLine);
+            rv.Append(DeterStringForProperty(IsStrangerOutside, "there is a Stranger is outside", "stranger outside doesnt matter", "no stranger outside"));
+            rv.Append(System.Environment.NewLine);
+            rv.Append(DeterStringForProperty(IsOwnerSayingSitCommand, "Owner is trying to get me to sit", "Doesnt matter is owner is trying to get me to sit", "Owner is not trying to get me to sit"));
+            rv.Append(System.Environment.NewLine);
+            rv.Append(DeterStringForProperty(DidOwnerGiveToy, "owner gave mea  toy", "toy is irrellivant", "no toy"));
+            rv.Append(System.Environment.NewLine);
+            return rv.ToString();
         }
     }
 }
