@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Bot.Core
 {
@@ -33,6 +34,18 @@ namespace Bot.Core
             }
         }
 
+        private string DeterStringForProperty(bool? value, string yesString, string wildcardString, string noString)
+        {
+            if (value == null)
+            {
+                return wildcardString;
+            } else
+            {
+                if (value.GetValueOrDefault()) return yesString;
+                else return noString;
+            }
+        }
+
         public Environment Random()
         {
 
@@ -45,18 +58,36 @@ namespace Bot.Core
             this.DidOwnerGiveToy = SeedRandomBool();
             return this;
         }
-
-
-        private string DeterStringForProperty(bool? value, string yesString, string wildcardString, string noString)
+        
+        private bool CompareProperties(bool? thisValue, bool? otherValue)
         {
-            if (value == null)
+
+            if (otherValue == null)
             {
-                return wildcardString;
-            } else
-            {
-                if (value.GetValueOrDefault()) return yesString;
-                else return noString;
+               return true;
             }
+            else
+            {
+              return (otherValue == thisValue);
+            }
+        }
+        
+        public bool DoesMatch(Environment other)
+        {
+            var rv = new List<bool>();
+
+            rv.Add(CompareProperties(this.IsDay, other.IsDay));
+
+            rv.Add(CompareProperties(this.DidOwnerGiveToy, other.DidOwnerGiveToy));
+            rv.Add(CompareProperties(this.IsOwnerHome, other.IsOwnerHome));
+            rv.Add(CompareProperties(this.IsOwnerSleeping, other.IsOwnerSleeping));
+            rv.Add(CompareProperties(this.IsStrangerOutside, other.IsStrangerOutside));
+            rv.Add(CompareProperties(this.IsStrangerInside, other.IsStrangerInside));
+            rv.Add(CompareProperties(this.IsOwnerSayingSitCommand, other.IsOwnerSayingSitCommand));
+
+
+
+            return rv.All(a => a);
         }
 
         public override string ToString()

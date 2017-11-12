@@ -62,7 +62,7 @@ namespace TrainableBot
 
             // determin is action is any good
             // train
-
+            Console.ReadLine();
         }
     }
 }

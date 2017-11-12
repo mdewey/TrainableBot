@@ -27,11 +27,28 @@ namespace Bot.Core
         public BotActions SelectAction(Environment currentConditions)
         {
             BotActions rv = null;
-            while (rv == null)
+            var i = 0;
+            var attempts = 0;
+            while (rv == null && attempts <= 10)
             {
-
+                if (i >= this.Actions.Count)
+                {
+                    i = 0;
+                    attempts++;
+                }
+                var testing = this.Actions[i];
+                if (testing.Conditions.DoesMatch(currentConditions))
+                {
+                    rv = testing;
+                }
+                i++;
             }
-
+            if (rv == null)
+            {
+                var random = new BotActions().Random();
+                this.Actions.Add(random);
+                rv = random;
+            }
             return rv;
 
         }
