@@ -59,8 +59,24 @@ namespace TrainableBot
             Console.WriteLine(currentConditions);
             // select action
             var selectAction = bot.SelectAction(currentConditions);
-
+            Console.WriteLine($"{bot.Name} is going to do {selectAction.Action}");
             // determin is action is any good
+            Console.WriteLine();
+            Console.WriteLine("was this right?");
+            var choice = Console.ReadLine();
+            if (choice.ToLower() == "n")
+            {
+                Console.WriteLine("bad dog");
+            }
+            else if (choice.ToLower() == "y")
+            {
+                Console.WriteLine("good dog");
+            }
+            else
+            {
+                Console.WriteLine("neither bad nor good, no change made");
+            }
+
             // train
             Console.ReadLine();
         }

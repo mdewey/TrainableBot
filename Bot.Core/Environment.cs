@@ -74,16 +74,17 @@ namespace Bot.Core
         
         public bool DoesMatch(Environment other)
         {
-            var rv = new List<bool>();
+            var rv = new List<bool>
+            {
+                CompareProperties(this.IsDay, other.IsDay),
 
-            rv.Add(CompareProperties(this.IsDay, other.IsDay));
-
-            rv.Add(CompareProperties(this.DidOwnerGiveToy, other.DidOwnerGiveToy));
-            rv.Add(CompareProperties(this.IsOwnerHome, other.IsOwnerHome));
-            rv.Add(CompareProperties(this.IsOwnerSleeping, other.IsOwnerSleeping));
-            rv.Add(CompareProperties(this.IsStrangerOutside, other.IsStrangerOutside));
-            rv.Add(CompareProperties(this.IsStrangerInside, other.IsStrangerInside));
-            rv.Add(CompareProperties(this.IsOwnerSayingSitCommand, other.IsOwnerSayingSitCommand));
+                CompareProperties(this.DidOwnerGiveToy, other.DidOwnerGiveToy),
+                CompareProperties(this.IsOwnerHome, other.IsOwnerHome),
+                CompareProperties(this.IsOwnerSleeping, other.IsOwnerSleeping),
+                CompareProperties(this.IsStrangerOutside, other.IsStrangerOutside),
+                CompareProperties(this.IsStrangerInside, other.IsStrangerInside),
+                CompareProperties(this.IsOwnerSayingSitCommand, other.IsOwnerSayingSitCommand)
+            };
 
 
 
