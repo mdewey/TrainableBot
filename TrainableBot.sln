@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainableBot", "TrainableBot\TrainableBot.csproj", "{D01A82AF-D2BF-4F43-B747-63DC4D42E928}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainableBot", "TrainableBot\TrainableBot.csproj", "{D01A82AF-D2BF-4F43-B747-63DC4D42E928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot.Core", "Bot.Core\Bot.Core.csproj", "{ECD24DD3-C3D8-47EF-919D-441F296BC32D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bot.Core", "Bot.Core\Bot.Core.csproj", "{ECD24DD3-C3D8-47EF-919D-441F296BC32D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{A4A7D93E-C96C-4B92-8003-7B95D0CDC5BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{ECD24DD3-C3D8-47EF-919D-441F296BC32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECD24DD3-C3D8-47EF-919D-441F296BC32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECD24DD3-C3D8-47EF-919D-441F296BC32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4A7D93E-C96C-4B92-8003-7B95D0CDC5BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4A7D93E-C96C-4B92-8003-7B95D0CDC5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4A7D93E-C96C-4B92-8003-7B95D0CDC5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4A7D93E-C96C-4B92-8003-7B95D0CDC5BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

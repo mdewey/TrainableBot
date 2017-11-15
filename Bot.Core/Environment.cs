@@ -59,10 +59,10 @@ namespace Bot.Core
             return this;
         }
         
-        private bool CompareProperties(bool? thisValue, bool? otherValue)
+        public static bool CompareProperties(bool? thisValue, bool? otherValue)
         {
 
-            if (otherValue == null)
+            if (otherValue == null || thisValue == null)
             {
                return true;
             }
