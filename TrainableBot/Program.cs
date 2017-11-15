@@ -23,64 +23,34 @@ namespace TrainableBot
             Console.WriteLine(bot);
             // give bot random actions
             bot.PopulateActions();
-            // get env
-            var currentConditions = new Bot.Core.Environment();
-            var input = String.Empty;
-            Console.WriteLine("Is day out?");
-            input = Console.ReadLine();
-            currentConditions.IsDay = ConvertStringToBool(input);
-
-            Console.WriteLine("Is my owner home?");
-            input = Console.ReadLine();
-            currentConditions.IsOwnerHome = ConvertStringToBool(input);
-
-            if (currentConditions.IsOwnerHome.GetValueOrDefault())
+            var count = 0;
+            while (true)
             {
-                Console.WriteLine("Is my owner sleeping");
-                input = Console.ReadLine();
-                currentConditions.IsOwnerSleeping = ConvertStringToBool(input);
-            }
+                count++;
+                Console.WriteLine($"giving the {count} command");
+                // get env
+                var currentConditions = new Bot.Core.Environment().Random();
+                Console.WriteLine(currentConditions);
+                // select action
+                var selectAction = bot.SelectAction(currentConditions);
+                Console.WriteLine($"{bot.Name} is going to do {selectAction.Action}");
+                // determin is action is any good
 
-            Console.WriteLine("Is there a stranger outside");
-            input = Console.ReadLine();
-            currentConditions.IsStrangerOutside = ConvertStringToBool(input);
+                if (selectAction.Action == "sit")
+                {
+                    bot.StrengthenAction(selectAction);
+                }
+                else
+                {
+                    bot.WeakenAction(selectAction);
+                }
 
-            Console.WriteLine("Is there a stranger inside");
-            input = Console.ReadLine();
-            currentConditions.IsStrangerInside = ConvertStringToBool(input);
-
-            Console.WriteLine("Is Owner trying to get my to sit");
-            input = Console.ReadLine();
-            currentConditions.IsOwnerSayingSitCommand = ConvertStringToBool(input);
-
-            Console.WriteLine("Did my owner give toy?");
-            input = Console.ReadLine();
-            currentConditions.DidOwnerGiveToy = ConvertStringToBool(input);
-            Console.WriteLine(currentConditions);
-            // select action
-            var selectAction = bot.SelectAction(currentConditions);
-            Console.WriteLine($"{bot.Name} is going to do {selectAction.Action}");
-            // determin is action is any good
-            Console.WriteLine();
-            Console.WriteLine("was this right?");
-            var choice = Console.ReadLine();
-            if (choice.ToLower() == "n")
-            {
-                Console.WriteLine("bad dog");
-                bot.WeakenAction(selectAction);
-            }
-            else if (choice.ToLower() == "y")
-            {
-                Console.WriteLine("good dog");
-                bot.StrengthenAction(selectAction);
-            }
-            else
-            {
-                Console.WriteLine("neither bad nor good, no change made");
+                Console.WriteLine("removing bad actions");
+                bot.RemoveBadActions();
+                //Console.ReadLine();
             }
 
             // train
-            Console.ReadLine();
         }
     }
 }

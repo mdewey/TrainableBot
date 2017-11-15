@@ -45,18 +45,27 @@ namespace Bot.Core
             }
             if (rv == null)
             {
+
                 var random = new BotActions().Random();
                 this.Actions.Add(random);
                 rv = random;
             }
             return rv;
+        }
 
+        private void RemoveLowestAction()
+        {
+            var _lowest = this.Actions.OrderBy(w => w.Strength).First().Id;
+            this.Actions = this.Actions.Where(w => w.Id != _lowest).ToList();
         }
 
         private void ChangeActionStrength(Guid id, int weightModifier)
         {
             var _action = this.Actions.First(f => f.Id == id);
-            _action.Strength += weightModifier;
+            if (_action.Strength < 100)
+            {
+                _action.Strength += weightModifier;
+            }
         }
 
         public void WeakenAction(BotActions selectAction)
@@ -67,5 +76,15 @@ namespace Bot.Core
         {
             this.ChangeActionStrength(selectAction.Id, 10);
         }
+
+        public void RemoveBadActions()
+        {
+            this.Actions = this.Actions.Where(w => w.Strength > 20).ToList();
+            while(this.Actions.Count < 10)
+            {
+                this.Actions.Add(new BotActions().Random());
+            }
+        }
+
     }
 }

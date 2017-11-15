@@ -1,0 +1,51 @@
+﻿   var input = String.Empty;
+            Console.WriteLine("Is day out?");
+            input = Console.ReadLine();
+            currentConditions.IsDay = ConvertStringToBool(input);
+
+            Console.WriteLine("Is my owner home?");
+            input = Console.ReadLine();
+            currentConditions.IsOwnerHome = ConvertStringToBool(input);
+
+            if (currentConditions.IsOwnerHome.GetValueOrDefault())
+            {
+                Console.WriteLine("Is my owner sleeping");
+                input = Console.ReadLine();
+                currentConditions.IsOwnerSleeping = ConvertStringToBool(input);
+            }
+
+            Console.WriteLine("Is there a stranger outside");
+            input = Console.ReadLine();
+            currentConditions.IsStrangerOutside = ConvertStringToBool(input);
+
+            Console.WriteLine("Is there a stranger inside");
+            input = Console.ReadLine();
+            currentConditions.IsStrangerInside = ConvertStringToBool(input);
+
+            Console.WriteLine("Is Owner trying to get my to sit");
+            input = Console.ReadLine();
+            currentConditions.IsOwnerSayingSitCommand = ConvertStringToBool(input);
+
+            Console.WriteLine("Did my owner give toy?");
+            input = Console.ReadLine();
+            currentConditions.DidOwnerGiveToy = ConvertStringToBool(input);
+         
+
+
+		  Console.WriteLine();
+                Console.WriteLine("was this right?");
+                var choice = Console.ReadLine();
+                if (choice.ToLower() == "n")
+                {
+                    Console.WriteLine("bad dog");
+                    bot.WeakenAction(selectAction);
+                }
+                else if (choice.ToLower() == "y")
+                {
+                    Console.WriteLine("good dog");
+                    bot.StrengthenAction(selectAction);
+                }
+                else
+                {
+                    Console.WriteLine("neither bad nor good, no change made");
+                }
