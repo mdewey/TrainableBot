@@ -52,5 +52,20 @@ namespace Bot.Core
             return rv;
 
         }
+
+        private void ChangeActionStrength(Guid id, int weightModifier)
+        {
+            var _action = this.Actions.First(f => f.Id == id);
+            _action.Strength += weightModifier;
+        }
+
+        public void WeakenAction(BotActions selectAction)
+        {
+            this.ChangeActionStrength(selectAction.Id, -10);
+        }
+        public void StrengthenAction(BotActions selectAction)
+        {
+            this.ChangeActionStrength(selectAction.Id, 10);
+        }
     }
 }

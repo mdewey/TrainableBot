@@ -67,10 +67,12 @@ namespace TrainableBot
             if (choice.ToLower() == "n")
             {
                 Console.WriteLine("bad dog");
+                bot.WeakenAction(selectAction);
             }
             else if (choice.ToLower() == "y")
             {
                 Console.WriteLine("good dog");
+                bot.StrengthenAction(selectAction);
             }
             else
             {
